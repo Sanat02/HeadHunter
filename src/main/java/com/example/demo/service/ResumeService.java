@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 
-import com.example.demo.dao.ResumeDao;
+
 import com.example.demo.dto.*;
 
 import com.example.demo.model.*;
@@ -180,5 +180,19 @@ public class ResumeService {
                 pageable.getOffset() + pageable.getPageSize());
         List<ResumeDto> subList = list.subList(startIndex, endIndex);
         return new PageImpl<>(subList, pageable, list.size());
+    }
+    public ResumeDto mapToResumeDto(Resume resume) {
+        if (resume == null) {
+            return null;
+        }
+        return ResumeDto.builder()
+                .id(resume.getId())
+                .expectedSalary(resume.getExpectedSalary())
+                .job(resume.getJob())
+                .applicant(userService.mapToUserDto(userService.getUserById(resume.getUserId()).orElse(null)))
+                .education(educationService.getEducationByResumeId(resume.getId()).orElse(null))
+                .jobExperience(jobExperienceService.getJobExperienceById(resume.getId()).orElse(null))
+                .contacts(contactsService.getContactsDtoByResumeId(resume.getId()))
+                .build();
     }
 }

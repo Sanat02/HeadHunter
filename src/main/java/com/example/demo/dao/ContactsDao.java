@@ -33,7 +33,7 @@ public class ContactsDao extends BaseDao {
                 "VALUES (?, ?, ?)";
         jdbcTemplate.update(con->{
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
-            ps.setInt(1,contacts.getResumeId());
+            ps.setInt(1,contacts.getResume().getId());
             ps.setString(2,contacts.getType().toString());
             ps.setString(3, contacts.getValue());
             return ps;

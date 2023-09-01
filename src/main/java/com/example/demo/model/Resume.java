@@ -3,6 +3,8 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -25,4 +27,7 @@ public class Resume {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToOne(fetch=FetchType.LAZY,mappedBy = "resume")
+    private Contacts contacts;
 }

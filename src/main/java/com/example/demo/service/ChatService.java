@@ -20,7 +20,7 @@ public class ChatService {
 
     private final ChatRepository chatRepository;
     private final UserService userService;
-    
+
     public int saveMessage(ChatDto chatDto, Authentication auth) {
         Chat chat = Chat.builder()
                 .message(chatDto.getMessage())
